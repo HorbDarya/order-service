@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-customers" author="Horb Darya">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customers"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="customers">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="customers"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
